@@ -107,7 +107,15 @@ class ManagePage(context: Context?, id: Int) : FCLPage(context, id, R.layout.pag
             right.layoutManager = LinearLayoutManager(context)
             right.adapter = ManageItemAdapter(
                 context,
+                // First on the page: the game cannot start until the engine's resources are
+                // built, and a button further down is a button people never find.
                 listOf(
+                    ManageItem(
+                        R.drawable.ic_baseline_build_24,
+                        R.string.version_manage_starling_resources
+                    ) {
+                        buildEngineResources()
+                    },
                     ManageItem(R.drawable.ic_baseline_update_24, R.string.version_update) {
                         if (!currentVersionUpgradable.get()) {
                             AnimUtil.playTranslationX(it, 500, 0f, 50f, -50f, 0f)
@@ -133,12 +141,6 @@ class ManagePage(context: Context?, id: Int) : FCLPage(context, id, R.layout.pag
                         R.string.version_manage_redownload_assets_index
                     ) {
                         redownloadAssetIndex()
-                    },
-                    ManageItem(
-                        R.drawable.ic_baseline_build_24,
-                        R.string.version_manage_starling_resources
-                    ) {
-                        buildEngineResources()
                     },
                     ManageItem(
                         R.drawable.ic_baseline_delete_24,

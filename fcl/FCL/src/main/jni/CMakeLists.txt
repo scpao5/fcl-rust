@@ -6,8 +6,13 @@ project("fcl")
 set(CMAKE_C_STANDARD 11)
 set(CMAKE_CXX_STANDARD 11)
 
-# 查找ByteHook库
-find_package(bytehook REQUIRED CONFIG)
+# 查找ByteHook库。它只被 JVM 启动器（fcl、pojavexec）链接，而这条构建线不建 JVM：
+# 缺少时留一个空目标，让这两个 target 的链接行仍能配置，其余目标不受影响。
+find_package(bytehook CONFIG QUIET)
+if (NOT bytehook_FOUND)
+    add_library(bytehook_empty INTERFACE)
+    add_library(bytehook::bytehook ALIAS bytehook_empty)
+endif()
 
 # 设置全局包含目录
 include_directories(

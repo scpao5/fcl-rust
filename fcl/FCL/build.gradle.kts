@@ -57,10 +57,9 @@ android {
         applicationId = "com.sbby.fclrust"
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
-        // Tracks the FCL release whose UI layer this build carries; the patch offset keeps a
-        // Starling build ahead of the stock one it was rebased on.
-        versionCode = 1347
-        versionName = "1.3.4.7-Rust"
+        // FCLRust's own numbering, no longer tied to the FCL release the UI layer came from.
+        versionCode = 10000
+        versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -140,6 +139,14 @@ android {
     }
 
     ndkVersion = "30.0.16248370"
+
+    // targetSdk 28 is deliberate: it is what lets the unpacked Java runtime run from the app's
+    // own files. Lint's ExpiredTargetSdkVersion is Play Store policy, and this app is not
+    // distributed through Play, so the check would only block the build.
+    lint {
+        disable += "ExpiredTargetSdkVersion"
+        checkReleaseBuilds = false
+    }
 
     defaultConfig {
         // Only arm64: the Rust engine ships for that ABI alone, and the other three natives

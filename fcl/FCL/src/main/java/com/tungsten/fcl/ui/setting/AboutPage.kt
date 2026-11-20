@@ -200,6 +200,8 @@ class AboutPage(context: Context?, id: Int) : FCLPage(context, id, R.layout.page
             LinkItem(R.string.about_this_fork, "https://github.com/scpao5/fcl-rust"),
             LinkItem(R.string.about_developer, "https://github.com/scpao5"),
             LinkItem(R.string.community_qq, null),
+            // The reward code itself, which the browser shows as an image.
+            LinkItem(R.string.about_sponsor, "https://raw.githubusercontent.com/scpao5/fcl-rust/main/docs/reward.png"),
             LinkItem(R.string.about_engine, "https://github.com/horizon-rust/horizon"),
             LinkItem(R.string.about_port, "https://github.com/starling-client/starling"),
             LinkItem(R.string.about_launcher, "https://fcl-team.github.io/"),

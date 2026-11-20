@@ -33,8 +33,8 @@ import java.util.logging.Level;
 
 public class MainUI extends FCLCommonUI implements View.OnClickListener {
 
-    public static final String ANNOUNCEMENT_URL = "https://raw.githubusercontent.com/FCL-Team/FCL-Repo/refs/heads/main/res/announcement_v2.txt";
-    public static final String ANNOUNCEMENT_URL_CN = "https://gitee.com/fcl-team/FCL-Repo/raw/main/res/announcement_v2.txt";
+    public static final String ANNOUNCEMENT_URL = "https://raw.githubusercontent.com/scpao5/fcl-rust/main/docs/announcement.txt";
+    public static final String ANNOUNCEMENT_URL_CN = "https://raw.githubusercontent.com/scpao5/fcl-rust/main/docs/announcement.txt";
 
     private LinearLayoutCompat announcementContainer;
     private LinearLayoutCompat announcementLayout;

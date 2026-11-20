@@ -166,6 +166,15 @@ public class FCLInput implements View.OnCapturedPointerListener {
             // half (CallbackBridge) was never loaded.
             return;
         }
+        // The wheel is not a button here: the bridge would turn it into one and call a native
+        // half that was never loaded, so it goes to the engine's own wheel instead.
+        if (keycode == MOUSE_SCROLL_UP || keycode == MOUSE_SCROLL_DOWN) {
+            if (press) {
+                io.github.juanluci.starling.StarlingActivity.sendMouseWheel(
+                        0f, keycode == MOUSE_SCROLL_UP ? 1f : -1f);
+            }
+            return;
+        }
         if (menu.getBridge() != null) {
             if (MOUSE_MAP.containsKey(keycode) && MOUSE_MAP.get(keycode) != null) {
                 if (isDuplicateMouseButtonEvent(keycode, press)) {
@@ -211,6 +220,11 @@ public class FCLInput implements View.OnCapturedPointerListener {
     public void resetExternalMouseState() {
         if (menu.getBridge() != null) {
             for (Integer keycode : MOUSE_MAP.keySet()) {
+                // The wheel is not a button, and the bridge would call a native half that was
+                // never loaded for it; sendKeyEvent releases it through the engine instead.
+                if (keycode == MOUSE_SCROLL_UP || keycode == MOUSE_SCROLL_DOWN) {
+                    continue;
+                }
                 if (Boolean.TRUE.equals(mouseButtonState.get(keycode))) {
                     menu.getBridge().pushEventMouseButton(MOUSE_MAP.get(keycode), false);
                 }
