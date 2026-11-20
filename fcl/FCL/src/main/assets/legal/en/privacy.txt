@@ -1,0 +1,68 @@
+FCLRust Privacy Policy
+
+Version: 1
+Last updated: November 20, 2026
+
+FCLRust (the "Software") is a Minecraft: Java Edition launcher for Android, built from Fold Craft Launcher and running the game on the Starling engine in place of a JVM. We care about your privacy. This policy explains what information the Software processes, why it does so, where the information is sent, and how you can manage it. Please read it carefully before using the Software.
+
+1. Overview
+
+1) The Software has no account system of its own. The developers do not sell or rent your personal information.
+2) The Software includes no analytics, advertising or push-notification SDKs.
+3) Most data stays on your device. Only when you use an online feature does the device connect directly to the corresponding service, which will see your IP address and similar request information.
+4) Before you agree to this policy and the User Agreement, the Software requests no permissions and makes no network connections.
+
+2. Information stored on your device
+
+The following is processed and kept on your device; the developers cannot reach it:
+
+1) Account information: for offline accounts, the username and UUID; for Microsoft and third-party (authlib-injector) accounts, the username, UUID, skin information and login credentials (such as access and refresh tokens). It is kept in the app's private directory and used only to sign in and start the game.
+2) Game data: versions, mods, modpacks, resource packs, shader packs, worlds, screenshots and control layouts. These live in the launcher's folder in shared storage or in the app's own directory. Files in shared storage may be read by file managers or other apps that hold storage permission.
+3) Settings: launcher settings, game settings, favourites and download records.
+4) Logs and crash reports: launcher, game and multiplayer logs, and crash reports. They may contain the device brand and model, system version, CPU and GPU details, memory information, file paths and in-game player names. Logs live in the game folder in shared storage and do not leave your device unless you share or upload them yourself.
+
+3. Preparing the game's resources
+
+1) The first time a version starts, the Software uses Starling's preparation program to make the resources the game reads (textures, models, languages, sounds) from the game files you already have. This runs entirely on your device, and what it writes stays there.
+2) That step starts a Java runtime that ships with the package to read the game's files. It is used only for preparing resources, never to run the game itself.
+3) It reads the version files, libraries and asset index in the game folder; if any are missing, the launcher fetches them from the download source you chose, as described below.
+4) The Software writes configuration files the engine reads, such as horizon-args.txt in the game folder (your graphics backend, for one). These stay on your device as well.
+
+4. Online features and third-party services
+
+When you use the following features, your device connects directly to the corresponding services. Those services receive your IP address and what the request carries (such as the file requested or the search terms), and some requests carry the Software's version number. They are run by third parties or other open-source projects and handle information under their own privacy policies; the developers cannot control them.
+
+1) Update checks and announcements: the Software fetches version information and announcements from GitHub.
+2) Game and loader downloads: when downloading the game, assets, libraries and loaders, the Software connects to Mojang's and Microsoft's official servers, the BMCLAPI mirror, and the servers or mirrors of Forge, NeoForge, Fabric, Quilt, LiteLoader, OptiFine, Cleanroom and their dependency repositories (including the metadata service HMCL provides), according to the download source you chose.
+3) Browsing and downloading content: when searching for and downloading mods, modpacks, resource packs, shader packs and worlds, the Software connects to CurseForge, Modrinth or the MCIM mirror, and loads icons and screenshots. Requests carry your search terms and filters.
+
+5. Permissions
+
+The Software requests permissions only for the features that need them. You can revoke a granted permission in the system settings at any time; the matching feature then stops working.
+
+6. Storage and security
+
+1) The Software does not upload your personal information to any server of the developers' own (there is none).
+2) Account credentials are kept in the app's private directory, which other apps cannot read directly.
+3) Game files, logs and screenshots in shared storage may be readable by other apps holding storage permission; judge that risk for yourself.
+
+7. Your rights
+
+1) You may view, change or delete the game files, settings and logs on your device at any time.
+2) You may clear the app's data or uninstall the Software to delete everything in its private directory.
+3) Revoking storage or network permission disables the features that need them.
+
+8. Minors
+
+If you are under 14, please read this policy with a guardian and use the Software only with their consent.
+
+9. Changes to this policy
+
+This policy may be updated as laws or features change. After an update, the Software shows the new version at start and asks for your consent again.
+
+10. Contact us
+
+If you have any questions about this policy, please let us know at:
+https://github.com/scpao5/starling/issues
+
+This policy is available in several languages. If the language versions differ, the Simplified Chinese version prevails.

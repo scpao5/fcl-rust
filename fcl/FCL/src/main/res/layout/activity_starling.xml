@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Starling's game screen: the engine draws into the TextureView at the bottom, and FCL's own
+     controls (GameMenu: the touch buttons, the menu, the controls editor) are added on top of it
+     by addContentView, exactly as they are for a Java game. The TextureView is not a SurfaceView
+     because GameMenu's magnifier and input mapping read its SurfaceTexture. -->
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@color/black"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextureView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/texture_view"/>
+
+</RelativeLayout>

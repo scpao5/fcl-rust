@@ -1,0 +1,84 @@
+FCLRust User Agreement
+
+Version: 1
+Last updated: November 20, 2026
+
+FCLRust (the "Software") is a Minecraft: Java Edition launcher for Android. It is built from the source code of Fold Craft Launcher and runs the game on the Starling engine in place of a JVM.
+
+Please read this agreement and the Privacy Policy carefully before using the Software. By tapping "Agree and Continue", you confirm that you have read, understood and agreed to this agreement and the Privacy Policy in full. If you do not agree, do not use the Software.
+
+1. Software license
+
+1) The Software is released under the GNU Affero General Public License, version 3 (AGPL-3.0); its full text is the LICENSE file at the root of the Software's repository.
+2) The Software is built from Fold Craft Launcher (FCL), developed by FCL-Team and released under GPL-3.0. FCL's rights belong to FCL-Team and its contributors.
+3) The Starling engine the Software runs comes from the horizon-rust/horizon project and its Android port, starling-client/starling; their rights belong to their own maintainers.
+4) The Software is provided free of charge.
+5) Third-party components the Software uses are each bound by their own licenses.
+6) Source code:
+https://github.com/scpao5/starling
+Upstream projects:
+https://github.com/FCL-Team/FoldCraftLauncher
+https://github.com/horizon-rust/horizon
+https://github.com/starling-client/starling
+
+2. Relationship with Minecraft
+
+1) The Software is an unofficial launcher. It is not affiliated with, endorsed by, or associated with Mojang Studios, Microsoft, or NetEase.
+2) Minecraft is a trademark of Mojang Synergies AB. All rights in the game and its content belong to their respective owners. The Software does not provide or sell any Minecraft license.
+3) When using Minecraft, you must follow the Minecraft End User License Agreement and obtain the game through official channels.
+
+3. The game's files and the engine
+
+1) The Software neither ships nor distributes any Minecraft game files. The version files, libraries and assets the game needs are either downloaded through the launcher or come from a copy you already have.
+2) Starling prepares the resources it reads from those files on your own device. The preparation runs locally and never uploads your game files.
+3) Starling is not the official implementation of Minecraft: Java Edition and may behave differently. The Software does not promise parity with the official client.
+4) The first time resources are prepared, the Software starts a Java runtime that ships with the package to read the game's files. It is used only for that preparation, never to run the game.
+
+4. Regional features
+
+1) Some features may not be available in your country or region due to local law.
+2) The Software determines your region only from the device's time zone and system locale, to choose download mirrors and similar preferences. This is done entirely on the device; no network-based geolocation is used. See the Privacy Policy.
+
+5. Acceptable use
+
+When using the Software, you agree to:
+1) follow the laws and regulations of your country or region;
+2) not use the Software for unlawful activities, or to infringe the intellectual property, privacy or other rights of others;
+3) not distribute unlawful or infringing content, including but not limited to modpacks, mods, resource packs, worlds and control layouts;
+4) follow the rules of the game servers, multiplayer services and other third-party services you use;
+5) not attack, interfere with or damage the Software or its related services, or hinder others from using them.
+
+6. Third-party content and services
+
+1) Mods, modpacks, resource packs, shader packs, worlds, skins and control layouts obtained through the Software are provided by third parties and belong to their authors. Follow their licenses.
+2) The download sources, content platforms, account services and multiplayer nodes the Software connects to are run by their own operators. Their availability, security, legality and content are their operators' responsibility; follow their terms of service.
+3) The Software does not review third-party content. You use it at your own risk.
+
+7. Disclaimer
+
+1) The Software is provided "as is", without any express or implied warranty, including but not limited to merchantability, fitness for a particular purpose and non-infringement.
+2) The Software does not guarantee it will run on every device, or meet all of your needs.
+3) You are responsible for any data loss, device malfunction or account ban resulting from the use of the Software or third-party content. Back up your worlds and data regularly.
+
+8. Limitation of liability
+
+To the maximum extent permitted by applicable law, the Software's developers and contributors are not liable for any direct, indirect, incidental, special or consequential damages arising from the use of, or inability to use, the Software.
+
+9. Intellectual property
+
+1) Rights in the Software's source code, name and icon belong to its developers and contributors. Use of the source code follows AGPL-3.0.
+2) Rights in the name, icon and identity of Fold Craft Launcher, on which the Software is based, belong to FCL-Team.
+3) Third-party trademarks, names and marks mentioned in the Software belong to their respective owners.
+
+10. Changes and termination
+
+1) The developers may update this agreement as laws or features change. After an update, the Software shows the new version at start and asks for your consent again.
+2) You may stop using and uninstall the Software at any time.
+
+11. Miscellaneous
+
+1) The Privacy Policy is part of this agreement.
+2) If any provision of this agreement is held invalid, the remaining provisions remain in effect.
+3) This agreement is available in several languages. If the language versions differ, the Simplified Chinese version prevails.
+4) If you have any questions, please let us know at:
+https://github.com/scpao5/starling/issues
