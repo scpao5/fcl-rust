@@ -247,15 +247,18 @@ public class DownloadPage extends FCLPage implements View.OnClickListener {
         downloadSource.removeListener(sourceListener);
         boolean localized = pageId != PAGE_ID_DOWNLOAD_WORLD;
         if (localized) {
-            // Horizon first and by default: it is the only source that serves mods this engine
-            // can actually load (native bundles and content packs). CurseForge and Modrinth stay
-            // for looking things up, and 聚合 searches both of them.
+            // Horizon first and by default for mods: it is the only source that serves mods this
+            // engine can actually load (native bundles and content packs). Everything else —
+            // resource packs, worlds, shader packs — Horizon does not carry, so 聚合, which
+            // searches CurseForge and Modrinth together, is the one that finds anything.
             downloadSources.get().setAll(
                     getContext().getString(R.string.mods_horizon),
                     getContext().getString(R.string.mods_aggregate),
                     getContext().getString(R.string.mods_curseforge),
                     getContext().getString(R.string.mods_modrinth));
-            downloadSource.set(getContext().getString(R.string.mods_horizon));
+            boolean modsPage = pageId == PAGE_ID_DOWNLOAD_MOD;
+            downloadSource.set(getContext().getString(
+                    modsPage ? R.string.mods_horizon : R.string.mods_aggregate));
         } else {
             downloadSources.clear();
             downloadSource.set(getContext().getString(R.string.mods_curseforge));
@@ -321,6 +324,11 @@ public class DownloadPage extends FCLPage implements View.OnClickListener {
         categoryData.addAll(DownloadCategory.forPageId(pageId));
         ArrayList<String> labels = categoryData.stream().map(this::categoryLabel).collect(Collectors.toCollection(ArrayList::new));
         categorySpinner.setItems(labels);
+        // A page whose source carries no categories yet (aggregate, before its first answer)
+        // has nothing to select: the spinner stays empty and the search runs without one.
+        if (categoryData.isEmpty()) {
+            return;
+        }
         int index = 0;
         if (searchState.category instanceof DownloadCategory dc) {
             int i = categoryData.indexOf(dc);
@@ -1240,6 +1248,9 @@ public class DownloadPage extends FCLPage implements View.OnClickListener {
             categoryData.addAll(result);
             ArrayList<String> resultStr = result.stream().map(this::getLocalizedCategoryIndent).collect(Collectors.toCollection(ArrayList::new));
             categorySpinner.setItems(resultStr);
+            if (result.isEmpty()) {
+                return;
+            }
             categorySpinner.setSelection(0);
             category.set(result.get(0));
             // 恢复该模式上次的分类筛选（分类列表就绪后）

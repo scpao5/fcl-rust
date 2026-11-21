@@ -137,6 +137,7 @@ public class FCLInput implements View.OnCapturedPointerListener {
         menu.setPointerY(y);
         // The engine's menus place a click by this pointer: a button alone says nothing about
         // where it landed.
+        io.github.juanluci.starling.StarlingActivity.loadGame();
         io.github.juanluci.starling.StarlingActivity.sendMouseMove(x, y);
         if (menu.getBridge() != null) {
             menu.getBridge().pushEventPointer(x, y);
@@ -154,6 +155,9 @@ public class FCLInput implements View.OnCapturedPointerListener {
         // button and every mapped control ends up.
         String key = io.github.juanluci.starling.InputKeys.name(keycode);
         if (key != null) {
+            // A control can be pressed while the game screen is not the one in front: the
+            // library is loaded lazily, so make sure it is before asking it for an entry point.
+            io.github.juanluci.starling.StarlingActivity.loadGame();
             io.github.juanluci.starling.StarlingActivity.sendKey(
                     key, press, keyChar == 0 ? 0 : keyChar);
         }
@@ -161,6 +165,7 @@ public class FCLInput implements View.OnCapturedPointerListener {
         // which only a Java game reads, so it goes to the engine's own queue here.
         int starlingButton = starlingButton(keycode);
         if (starlingButton >= 0) {
+            io.github.juanluci.starling.StarlingActivity.loadGame();
             io.github.juanluci.starling.StarlingActivity.sendMouseButton(starlingButton, press);
             // The engine took it: the Java game's bridge is nobody's listener here, and its native
             // half (CallbackBridge) was never loaded.
@@ -170,6 +175,7 @@ public class FCLInput implements View.OnCapturedPointerListener {
         // half that was never loaded, so it goes to the engine's own wheel instead.
         if (keycode == MOUSE_SCROLL_UP || keycode == MOUSE_SCROLL_DOWN) {
             if (press) {
+                io.github.juanluci.starling.StarlingActivity.loadGame();
                 io.github.juanluci.starling.StarlingActivity.sendMouseWheel(
                         0f, keycode == MOUSE_SCROLL_UP ? 1f : -1f);
             }
@@ -254,6 +260,7 @@ public class FCLInput implements View.OnCapturedPointerListener {
     public void sendChar(char keyChar) {
         // The engine has no bridge: its keyboard sends the character by itself, with no key of
         // its own (an empty name), which a field with the focus takes.
+        io.github.juanluci.starling.StarlingActivity.loadGame();
         io.github.juanluci.starling.StarlingActivity.sendKey("", true, keyChar);
         if (menu.getBridge() != null) {
             // Cleanroom 的 lwjglx 系兼容层将字母等 keydown 暂存，待 charMods 事件合并后才投给游戏，

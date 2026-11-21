@@ -45,6 +45,9 @@ public class StarlingActivity extends FCLActivity {
     /** The player name the launcher signed in with, so the engine joins with it. */
     public static final String EXTRA_PLAYER = "io.github.juanluci.starling.PLAYER";
 
+    /** The control layout the version is set to use, by the id FCL's controller list gives it. */
+    public static final String EXTRA_CONTROLLER = "io.github.juanluci.starling.CONTROLLER";
+
     private static final String FILES_DONE = "starling-files.json";
     private static final String VERSION = "26.3";
 
@@ -130,6 +133,18 @@ public class StarlingActivity extends FCLActivity {
         bridge = new FCLBridge();
         menu = new GameMenu();
         menu.setup(this, bridge);
+        // The layout the version is set to use. Without this the menu starts with none, and the
+        // game always shows the default one however the setting was changed.
+        String controllerId = getIntent() == null
+                ? null : getIntent().getStringExtra(EXTRA_CONTROLLER);
+        if (controllerId != null && !controllerId.isEmpty()) {
+            for (com.tungsten.fcl.setting.Controller c : com.tungsten.fcl.setting.Controllers.getControllers()) {
+                if (controllerId.equals(c.getId())) {
+                    menu.setController(c);
+                    break;
+                }
+            }
+        }
         addContentView(menu.getLayout(), new ViewGroup.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT));
         // After the bridge and the menu exist: the engine's first lines go to the log window,
@@ -449,7 +464,7 @@ public class StarlingActivity extends FCLActivity {
     }
 
     /** Loads the engine's library once: its JNI entry points must exist before onCreate calls one. */
-    private static synchronized void loadGame() {
+    public static synchronized void loadGame() {
         if (!libraryLoaded) {
             System.loadLibrary("horizon_android");
             libraryLoaded = true;

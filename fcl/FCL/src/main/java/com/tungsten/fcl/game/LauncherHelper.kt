@@ -365,6 +365,12 @@ class LauncherHelper(
                 io.github.juanluci.starling.StarlingActivity.EXTRA_PLAYER,
                 account.username
             )
+            // The control layout this version is set to use: the menu starts with none otherwise,
+            // and the default one shows whatever the setting says.
+            intent.putExtra(
+                io.github.juanluci.starling.StarlingActivity.EXTRA_CONTROLLER,
+                setting.controller
+            )
             // Where the game's own files are: the run folder holds the world, and the install
             // above it (or the run folder itself, when a version keeps its own) holds versions/,
             // assets/ and libraries/. The engine reads them instead of downloading 672 MB.
