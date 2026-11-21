@@ -1,24 +1,12 @@
 [
   {
     "type": "Release",
-    "versionCode": 10001,
-    "versionName": "1.1",
-    "date": "2026.11.21",
-    "description": [
-      { "lang": "zh_CN", "text": "测试更新提示" },
-      { "lang": "en", "text": "Update prompt test" }
-    ],
-    "url": "https://github.com/scpao5/fcl-rust/releases/download/v1.0/FCLRust-1.0.apk",
-    "netdiskUrl": ""
-  },
-  {
-    "type": "Release",
     "versionCode": 10000,
     "versionName": "1.0",
     "date": "2026.11.21",
     "description": [
-      { "lang": "zh_CN", "text": "首个正式版。" },
-      { "lang": "en", "text": "The first release." }
+      { "lang": "zh_CN", "text": "首个正式版。启动器基于 Fold Craft Launcher，游戏由 Starling（Rust 重写的 Minecraft Java 版引擎）运行，不需要 JVM。" },
+      { "lang": "en", "text": "The first release. The launcher is built on Fold Craft Launcher and the game runs on Starling, a Rust re-implementation of Java Edition, with no JVM." }
     ],
     "url": "https://github.com/scpao5/fcl-rust/releases/download/v1.0/FCLRust-1.0.apk",
     "netdiskUrl": ""
