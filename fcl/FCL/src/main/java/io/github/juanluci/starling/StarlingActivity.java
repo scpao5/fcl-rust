@@ -48,6 +48,13 @@ public class StarlingActivity extends FCLActivity {
     /** The control layout the version is set to use, by the id FCL's controller list gives it. */
     public static final String EXTRA_CONTROLLER = "io.github.juanluci.starling.CONTROLLER";
 
+    /**
+     * Set once this activity is going away. FCL's controls outlive it for a moment — a finger
+     * lifted or a control cancelled after the game closed still reaches sendKey — and the
+     * engine's library has nothing to take it by then.
+     */
+    private static volatile boolean finished;
+
     private static final String FILES_DONE = "starling-files.json";
     private static final String VERSION = "26.3";
 
@@ -87,6 +94,7 @@ public class StarlingActivity extends FCLActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        finished = false;
         traceFile = new File(getFilesDir(), "engine_trace.txt");
         trace("onCreate: entered");
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
@@ -210,6 +218,7 @@ public class StarlingActivity extends FCLActivity {
 
     @Override
     protected void onDestroy() {
+        finished = true;
         // The engine outlives this activity in the same process: without this it would keep
         // drawing into a window whose surface is gone.
         useSurface(null);
@@ -461,6 +470,11 @@ public class StarlingActivity extends FCLActivity {
         } catch (Throwable ignored) {
             // The trace must never be what breaks a start.
         }
+    }
+
+    /** Whether the game screen has been destroyed: its controls must stop asking it anything. */
+    public static boolean isFinished() {
+        return finished;
     }
 
     /** Loads the engine's library once: its JNI entry points must exist before onCreate calls one. */

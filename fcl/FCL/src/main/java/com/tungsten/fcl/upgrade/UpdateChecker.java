@@ -22,15 +22,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class UpdateChecker {
 
-    /**
-     * Off while this build has no release feed of its own: the URLs below point at FCL's upstream,
-     * whose versions are not this launcher's versions, so the dialog would offer an update that
-     * replaces Starling's engine with the stock one. A future feed sets both URLs and this flag.
-     */
-    public static final boolean UPDATE_CHECK_ENABLED = false;
+    /** This build's own release feed, which lists FCLRust's versions and not FCL's. */
+    public static final boolean UPDATE_CHECK_ENABLED = true;
 
-    public static final String UPDATE_CHECK_URL = "https://raw.githubusercontent.com/FCL-Team/FoldCraftLauncher/main/version_map.json";
-    public static final String UPDATE_CHECK_URL_CN = "https://gitee.com/fcl-team/FCL-Repo/raw/main/res/version_map.json";
+    public static final String UPDATE_CHECK_URL = "https://raw.githubusercontent.com/scpao5/fcl-rust/main/docs/version_map.json";
+    public static final String UPDATE_CHECK_URL_CN = "https://raw.githubusercontent.com/scpao5/fcl-rust/main/docs/version_map.json";
 
     private static UpdateChecker instance;
 

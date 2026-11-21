@@ -153,6 +153,11 @@ public class FCLInput implements View.OnCapturedPointerListener {
         // The engine is not the JVM: it has no pojavexec to push an event into. Its own queue
         // takes the key by name instead (InputKeys), and this is the one place every on-screen
         // button and every mapped control ends up.
+        // The game screen is gone: a control being released has nothing to send to, and asking
+        // the engine for an entry point then is what crashed the launcher after a quit.
+        if (io.github.juanluci.starling.StarlingActivity.isFinished()) {
+            return;
+        }
         String key = io.github.juanluci.starling.InputKeys.name(keycode);
         if (key != null) {
             // A control can be pressed while the game screen is not the one in front: the
