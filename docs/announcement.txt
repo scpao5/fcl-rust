@@ -1,29 +1,23 @@
 {
-  "id": 100,
+  "id": 101,
   "significant": true,
   "outdated": false,
   "minVersion": -1,
   "maxVersion": -1,
   "specificLang": [],
   "title": [
-    {
-      "lang": "zh_CN",
-      "text": "首次使用必读"
-    },
-    {
-      "lang": "en",
-      "text": "Read before first launch"
-    }
+    { "lang": "zh_CN", "text": "首次使用必读" },
+    { "lang": "en", "text": "Read before first launch" }
   ],
-  "date": "2026.11.20",
+  "date": "2026.11.22",
   "content": [
     {
       "lang": "zh_CN",
-      "text": "下载完游戏和资源后，请到「管理版本」页面，点最上方的「编译引擎资源」按钮，等它跑完再启动游戏。\n\n如果没看到这个按钮，往上滑一下，它在页面最顶部。\n\n遇到 bug 或崩溃，请加 QQ 群 929451892 反馈，附上日志更好。"
+      "text": "下载完游戏和资源后，请到「管理版本」页面，点最上方的「编译引擎资源」按钮，等它跑完再启动游戏。\n\n如果没看到这个按钮，往上滑一下，它在页面最顶部。\n\n如果游戏崩溃或闪退，可以把图形后端换成 opengl 试试：启动器里「管理版本」→「游戏特定设置」→「图形后端」选 opengl，或在游戏内 选项 → 视频设置 里切换。\n\n遇到 bug 或崩溃，请加 QQ 群 929451892 反馈，附上日志更好。"
     },
     {
       "lang": "en",
-      "text": "After the game and its resources have downloaded, open the version's management page and tap \"Build engine resources\" at the very top. Wait for it to finish before starting the game.\n\nIf you cannot see the button, scroll up: it is the first item on the page.\n\nFor bugs or crashes, join QQ group 929451892 and tell us, with the log if you can."
+      "text": "After the game and its resources have downloaded, open the version's management page and tap \"Build engine resources\" at the very top. Wait for it to finish before starting the game.\n\nIf you cannot see the button, scroll up: it is the first item on the page.\n\nIf the game crashes, try switching the graphics backend to opengl: in the launcher, open the version's settings and pick opengl under the graphics backend, or switch it in game under Options - Video Settings.\n\nFor bugs or crashes, join QQ group 929451892 and tell us, with the log if you can."
     }
   ]
 }
