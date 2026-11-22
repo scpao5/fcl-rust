@@ -1069,8 +1069,14 @@ public class GameMenu implements MenuCallback, FCLBridgeCallback {
                     gameItemBar.setVisibility(View.VISIBLE);
                 }
                 if (menuSetting.isPhysicalMouseMode()) {
-                    getInput().getFocusableView().requestFocus();
-                    getInput().getFocusableView().requestPointerCapture();
+                    // The view the pointer lives in, when the host activity handed one over: a
+                    // launcher that draws the game itself may not have, and asking a null view
+                    // for focus crashed the app on the first click into the world.
+                    View focus = getInput().getFocusableView();
+                    if (focus != null) {
+                        focus.requestFocus();
+                        focus.requestPointerCapture();
+                    }
                 } else {
                     getInput().ensurePointerCapture();
                 }

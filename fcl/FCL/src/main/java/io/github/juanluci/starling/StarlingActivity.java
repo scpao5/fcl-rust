@@ -73,6 +73,15 @@ public class StarlingActivity extends FCLActivity {
     public static native void sendMouseMotion(float dx, float dy);
     public static native void sendKey(String name, boolean down, int text);
 
+    /**
+     * The account the launcher signed in with, tokens and all. The engine seals them with the
+     * device's keystore and plays as that account; copying accounts.json alone would leave it
+     * on the offline name, which holds no credentials.
+     */
+    public static native void setAccount(
+            String uuid, String name, String provider,
+            String refreshToken, String minecraftToken, long expiresAt, String xuid);
+
     /** Hands the engine a Surface to render into; null when the TextureView's surface goes. */
     private static native void setSurface(Surface surface);
 
@@ -161,6 +170,10 @@ public class StarlingActivity extends FCLActivity {
         trace("onCreate: engine asked for");
 
         TextureView view = findViewById(R.id.texture_view);
+        // The view the pointer is captured into and focused for a physical mouse, as JVMActivity
+        // passes its own: without it every cursor-mode change asked a null view for focus, which
+        // both crashed the launcher and left the mouse unable to turn the camera.
+        menu.getInput().initExternalController(view);
         view.setSurfaceTextureListener(new TextureView.SurfaceTextureListener() {
             @Override
             public void onSurfaceTextureAvailable(SurfaceTexture texture, int width, int height) {
@@ -216,6 +229,27 @@ public class StarlingActivity extends FCLActivity {
                         | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION);
     }
 
+    /**
+     * A physical keyboard's keys, handed to FCL's input the way JVMActivity hands them. Nothing
+     * else reads them here: without this the launcher's game screen simply ignores the keyboard.
+     */
+    @Override
+    public boolean dispatchKeyEvent(android.view.KeyEvent event) {
+        if (menu != null && menu.getInput().handleKeyEvent(event)) {
+            return true;
+        }
+        return super.dispatchKeyEvent(event);
+    }
+
+    /** A controller's sticks and triggers, the same way. */
+    @Override
+    public boolean dispatchGenericMotionEvent(android.view.MotionEvent event) {
+        if (menu != null && menu.getInput().handleGenericMotionEvent(event)) {
+            return true;
+        }
+        return super.dispatchGenericMotionEvent(event);
+    }
+
     @Override
     protected void onDestroy() {
         finished = true;
@@ -247,6 +281,11 @@ public class StarlingActivity extends FCLActivity {
             String selectedOffline = null;
             String offlineSkin = null;
             String offlineModel = null;
+            String selectedProvider = null;
+            String selectedName = null;
+            String selectedRefresh = null;
+            String selectedToken = null;
+            long selectedExpires = 0L;
             for (int i = 0; i < list.length(); i++) {
                 org.json.JSONObject account = list.optJSONObject(i);
                 if (account == null) {
@@ -296,7 +335,27 @@ public class StarlingActivity extends FCLActivity {
                     online.put(entry);
                     if (selectedOnline == null) {
                         selectedOnline = uuid.toLowerCase();
+                        // The engine cannot play as this account from the list alone: it needs
+                        // the tokens, which only the launcher has.
+                        selectedProvider = entry.optString("provider", "Microsoft");
+                        selectedName = name;
+                        selectedRefresh = refreshToken;
+                        selectedToken = accessToken;
+                        selectedExpires = notAfter;
                     }
+                }
+            }
+            // Hand the signed-in account to the engine before it starts: it seals the tokens
+            // with the device's keystore and plays as that account.
+            if (selectedOnline != null && selectedToken != null && !selectedToken.isEmpty()) {
+                try {
+                    loadGame();
+                    setAccount(selectedOnline, selectedName, selectedProvider,
+                            selectedRefresh == null ? "" : selectedRefresh,
+                            selectedToken, selectedExpires, "");
+                    trace("accounts: handed " + selectedName + " to the engine");
+                } catch (Throwable e) {
+                    trace("accounts: the engine took no account: " + e);
                 }
             }
             org.json.JSONObject out = new org.json.JSONObject();
@@ -316,7 +375,7 @@ public class StarlingActivity extends FCLActivity {
                 importOfflineSkin(game, offlineSkin, offlineModel);
             }
             trace("accounts: imported " + online.length() + " online, " + offline.length()
-                    + " offline, skin " + offlineSkin);
+                    + " offline, selected " + selectedOnline + ", skin " + offlineSkin);
         } catch (Exception e) {
             trace("accounts: import failed: " + e);
         }

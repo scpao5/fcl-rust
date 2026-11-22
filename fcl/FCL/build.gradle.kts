@@ -58,8 +58,8 @@ android {
         minSdk = libs.versions.minSdk.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         // FCLRust's own numbering, no longer tied to the FCL release the UI layer came from.
-        versionCode = 10000
-        versionName = "1.0"
+        versionCode = 10001
+        versionName = "1.1"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 

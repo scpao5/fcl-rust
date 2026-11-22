@@ -2,8 +2,6 @@ package com.tungsten.fclauncher.keycodes;
 
 import android.view.KeyEvent;
 
-import java.util.Arrays;
-
 public class AndroidKeycodeMap {
 
     private static final int[] ANDROID_KEYCODES = new int[99];
@@ -18,9 +16,14 @@ public class AndroidKeycodeMap {
     }
 
     public static int convertKeycode(int androidKeycode) {
-        int index = Arrays.binarySearch(ANDROID_KEYCODES, androidKeycode);
-        if (index >= 0)
-            return FCL_KEYCODES[index];
+        // Registered in the order the keyboard is laid out, not in order of the codes, so a
+        // binary search over it answers with a neighbour's key: "/" arrived as Space and the
+        // numpad came out as whatever sat at its index. A scan is what the table allows.
+        for (int i = 0; i < count; i++) {
+            if (ANDROID_KEYCODES[i] == androidKeycode) {
+                return FCL_KEYCODES[i];
+            }
+        }
         return FCLKeycodes.KEY_UNKNOWN;
     }
 
